@@ -1,0 +1,77 @@
+{
+  "name": "js-sdsl",
+  "version": "2.1.4",
+  "description": "javascript standard data structure library which benchmark against C++ STL",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "author": {
+    "name": "ZLY201",
+    "email": "951711127@qq.com",
+    "url": "https://github.com/ZLY201/js-sdsl"
+  },
+  "scripts": {
+    "setup": "rm -rf node_modules && yarn",
+    "build": "yarn lint && rm -rf dist/test && yarn build:cjs && yarn build:umd:min",
+    "build:cjs": "rm -rf dist/cjs && tsc src/index.ts --downlevelIteration --declaration --module commonjs --target es5 --outDir dist/cjs",
+    "build:esm": "rm -rf dist/esm && tsc src/index.ts --downlevelIteration --declaration --module es2015 --target es5 --outDir dist/esm",
+    "build:umd": "yarn build:esm && rm -rf dist/umd && mkdir dist/umd && rollup dist/esm/index.js --format umd --name sdsl -o dist/umd/js-sdsl.js",
+    "build:umd:min": "yarn build:umd && cd dist/umd && uglifyjs --compress --mangle --source-map --ie8 --comments -o js-sdsl.min.js -- js-sdsl.js",
+    "test": "rm -rf dist/test && tsc --downlevelIteration --declaration src/test.ts --module commonjs --target es5 --outDir dist/test && node ./dist/test/test.js",
+    "lint": "eslint .eslintrc.json --fix --color --cache --max-warnings=0 ./src",
+    "deploy": "yarn build:umd:min && typedoc type --disableSources && mv dist/umd/* docs && gh-pages -d docs",
+    "pub": "yarn build && yarn publish"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "yarn lint"
+    ]
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.1.1",
+    "@types/node": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.4.1",
+    "gh-pages": "^3.2.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.0",
+    "rollup": "^2.61.1",
+    "typedoc": "^0.22.10",
+    "typescript": "^4.5.4",
+    "uglify-js": "^3.14.5"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/ZLY201/js-sdsl.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "data",
+    "structure",
+    "library",
+    "LinkList",
+    "Vector",
+    "Stack",
+    "Queue",
+    "Deque",
+    "PriorityQueue",
+    "Set",
+    "Map",
+    "RBTree",
+    "HashSet",
+    "HashMap",
+    "c++",
+    "STL"
+  ],
+  "bugs": {
+    "email": "951711127@qq.com",
+    "url": "https://github.com/ZLY201/js-sdsl/issues"
+  },
+  "dependencies": {}
+}

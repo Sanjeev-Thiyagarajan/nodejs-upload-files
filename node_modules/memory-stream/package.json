@@ -1,0 +1,27 @@
+{
+  "name": "memory-stream",
+  "version": "0.0.3",
+  "description": "Node.js streams implementation for buffered memory writes",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec -u tdd test/tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tommymessbauer/memory-stream.git"
+  },
+  "keywords": [
+    "streams",
+    "memory",
+    "buffer"
+  ],
+  "author": "Tommy Messbauer",
+  "license": "MMIT",
+  "bugs": {
+    "url": "https://github.com/tommymessbauer/memory-stream/issues"
+  },
+  "homepage": "https://github.com/tommymessbauer/memory-stream",
+  "dependencies": {
+    "readable-stream": "~1.0.26-2"
+  }
+}
